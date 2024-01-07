@@ -1,4 +1,18 @@
-local rs = require("lib.resolution_solution")
+io.stdout:setvbuf("no")
+love.graphics.setDefaultFilter("nearest", "nearest")
+
+local rs = require "lib.resolution_solution"
+
+input = require("lib.baton").new({
+	controls = {
+		left = { 'key:left', 'key:a', 'axis:leftx-', 'button:dpleft' },
+		right = { 'key:right', 'key:d', 'axis:leftx+', 'button:dpright' },
+		up = { 'key:up', 'key:w', 'axis:lefty-', 'button:dpup' },
+		down = { 'key:down', 'key:s', 'axis:lefty+', 'button:dpdown' },
+		action = { 'key:a', 'key:space', 'button:a' },
+	},
+	joystick = love.joystick.getJoysticks()[1],
+})
 
 Class = require "lib.classic"
 Object = require "hedge2d.Object"
@@ -9,6 +23,11 @@ local pl = Player()
 
 function love.load()
 	rs.conf({ game_width = 320, game_height = 224, scale_mode = 3 })
+end
+
+function love.update(dt)
+	input:update()
+	pl:update()
 end
 
 function love.draw()
