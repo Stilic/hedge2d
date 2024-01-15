@@ -37,7 +37,7 @@ function Player:update(dt)
 		local acceleration, deceleration = 0.046875, 0.5
 		local leftInput, rightInput = false, false
 
-		if self.controlLockTimer ~= 0 then
+		if self.controlLockTimer == 0 then
 			leftInput, rightInput = input:down("left"), input:down("right")
 			if leftInput then
 				if self.groundSpeed > 0 then
